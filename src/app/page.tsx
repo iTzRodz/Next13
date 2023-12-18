@@ -1,11 +1,20 @@
-export default async function Home() {
-  
-  await new Promise((resolve) => setTimeout(resolve, 2000))
-  
-  const response = await fetch('https://api.github.com/users/iTzRodz')
-  const users = await response.json()
-  return (
-      <pre>{JSON.stringify(users, null, 2)}</pre>
+import { Suspense } from "react" // Suspense é um component, e eu posso usar ele por volta de um component que demora para ser carregado
 
+import { GitHubProfile } from "@/components/github-profile";
+import Loading from "./loading";
+import { Teste } from "@/components/github-profile copy";
+
+export default  function Home() {
+  return (
+    <div>
+      <h1>Home!</h1>
+
+      <Suspense fallback={<Loading/>}>
+        <Teste/>  
+      </Suspense>
+      
+        <GitHubProfile/>
+    </div>
   )
+
 }
