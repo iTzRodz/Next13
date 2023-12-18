@@ -1,7 +1,11 @@
-export default function Home() {
+export default async function Home() {
+  
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  
+  const response = await fetch('https://api.github.com/users/iTzRodz')
+  const users = await response.json()
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>Teste</h1>
-    </main>
+      <pre>{JSON.stringify(users, null, 2)}</pre>
+
   )
 }
