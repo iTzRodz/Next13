@@ -3,15 +3,17 @@ import { Product } from "@/data/types/product";
 import Image from "next/image";
 import Link from "next/link";
 
+
 export default async function Home() {
   async function getFeaturedProducts(): Promise<Product[]> {
     const response = await api('/products/featured', {
-      next: {
-        revalidate: 60 * 60 //1 hour
-      }
+      cache: 'no-cache',
+      // next: {
+      //   revalidate: 60 * 60 //1 hour
+      // }
     })
-
-    const products = await response.json()
+  
+    const products = await response.json()      
     return products
   }
 
